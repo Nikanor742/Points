@@ -11,8 +11,11 @@ public class PointsGenerator : MonoBehaviour
     [SerializeField]
     private GameObject _columnObj;
     [SerializeField]
-    private GameObject _point;
+    private GameObject[] _points;
 
+    public Transform level;
+
+    [HideInInspector]
     public List<Column> columns;
 
 
@@ -55,8 +58,9 @@ public class PointsGenerator : MonoBehaviour
                         pos = new Vector3(-2f +(0.8f*(float)i), 5f + (float)j,0f);
                         
                     }
-
-                    Point tmp=Instantiate(_point, pos, transform.rotation).GetComponent<Point>();
+                    int rand = Random.Range(0, _points.Length);
+                    Point tmp = Instantiate(_points[rand], pos, transform.rotation).GetComponent<Point>();
+                    tmp.transform.parent = level;
                     tmp.columnId = i;
                 }
             }
