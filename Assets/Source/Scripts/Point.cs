@@ -4,24 +4,20 @@ using UnityEngine;
 
 public class Point : MonoBehaviour
 {
-    private Vector3 _lineStartPos;
     private bool _activate = false;
+    public int columnId = 0;
+    public int colorId = 0;
 
-    public void PointerDown()
+    private void OnMouseDown()
     {
-        _lineStartPos = Camera.main.ScreenToWorldPoint(transform.position);
-        TouchController.Instance.StartSwipe(_lineStartPos);
-        _activate = true;
+        _activate=PointsController.Instance.StartSwipe(transform.position,this,colorId);
     }
-    public void PointerEnter()
+
+    private void OnMouseEnter()
     {
-        Debug.Log("enter");
         if (!_activate)
         {
-            _activate = true;
-            _lineStartPos = Camera.main.ScreenToWorldPoint(transform.position);
-            _lineStartPos.z = 0;
-            TouchController.Instance.DrawLine(_lineStartPos, Color.red);
+            _activate = PointsController.Instance.AddPoint(this,transform.position,colorId);
         }
     }
 }
