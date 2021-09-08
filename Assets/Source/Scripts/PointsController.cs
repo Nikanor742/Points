@@ -14,6 +14,10 @@ public class PointsController : MonoBehaviour
     private float _lineWidth = 0.2f;
     [SerializeField]
     private Material[] _materials;
+    [SerializeField]
+    private float _activateDistance = 0.85f;
+    [SerializeField]
+    private float _timeToDestroyLine = 0.02f;
 
     private Material _currentMaterial;
     private Vector3 startPos;
@@ -88,7 +92,7 @@ public class PointsController : MonoBehaviour
     {
         if (swipe && colorId == currentColor)
         {
-            if(Vector3.Distance(startPos, pos) <= 0.85f)
+            if(Vector3.Distance(startPos, pos) <= _activateDistance)
             {
                 DrawLine(pos);
                 lines.Add(pointObj.gameObject);
@@ -128,7 +132,7 @@ public class PointsController : MonoBehaviour
         {
             Vector3 tmp = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             tmp.z = 0;
-            DrawRealTime(startPos, tmp, 0.02f);
+            DrawRealTime(startPos, tmp, _timeToDestroyLine);
         }
         if (Input.GetMouseButtonUp(0))
         {

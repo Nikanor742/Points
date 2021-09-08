@@ -12,6 +12,12 @@ public class PointsGenerator : MonoBehaviour
     private GameObject _columnObj;
     [SerializeField]
     private GameObject[] _points;
+    [SerializeField]
+    private float _leftPointPositionX = -2f;
+    [SerializeField]
+    private float _startInstantPointPositionY = 5f;
+    [SerializeField]
+    private float _pointsOffsetX = 0.8f;
 
     public Transform level;
 
@@ -51,11 +57,11 @@ public class PointsGenerator : MonoBehaviour
                     Vector3 pos = Vector3.zero;
                     if (i == 0)
                     {
-                        pos = new Vector3(-2f, 5f + (float)j, 0f);
+                        pos = new Vector3(_leftPointPositionX, _startInstantPointPositionY + (float)j, 0f);
                     }
                     else
                     {
-                        pos = new Vector3(-2f +(0.8f*(float)i), 5f + (float)j,0f);
+                        pos = new Vector3(_leftPointPositionX + (_pointsOffsetX * (float)i), _startInstantPointPositionY + (float)j, 0f);
                         
                     }
                     int rand = Random.Range(0, _points.Length);
